@@ -100,4 +100,7 @@
   <platform name="chrome">
     <icon src="/platforms/chrome/icon.png" width="128" height="128"/>
   </platform>
+    <platform name="ios">
+    <preference name="orientation" value="all"/>
+  </platform>
 </widget>
