@@ -1,3 +1,51 @@
 <ons-toolbar>
     <div class="center">Page3</div>
 </ons-toolbar>
+<script src="components/loader.js"></script>
+<link rel="stylesheet" href="components/loader.css">
+<link rel="stylesheet" href="css/style.css">
+<script>
+    document.addEventListener("deviceready", function()
+        {
+            // プッシュ通知受信時のコールバックを登録します
+            window.NCMB.monaca.setHandler
+            (
+                function(jsonData){
+                    // 送信時に指定したJSONが引数として渡されます
+                    alert("callback :::" + JSON.stringify(jsonData));
+                }
+            );
+
+            var successCallback = function () {
+                //端末登録後の処理
+            };
+            var errorCallback = function (err) {
+                //端末登録でエラーが発生した場合の処理
+            };
+            // デバイストークンを取得してinstallation登録が行われます
+            // ※ YOUR_APPLICATION_KEY,YOUR_CLIENT_KEYはニフティクラウドmobile backendから発行されたAPIキーに書き換えてください
+            // ※ YOUR_SENDER_IDはFCMでプロジェクト作成時に発行されたSender ID(送信者ID)に書き換えてください
+            window.NCMB.monaca.setDeviceToken(
+                "YOUR_APPLICATION_KEY",
+                "YOUR_CLIENT_KEY",
+                "YOUR_SENDER_ID",
+                successCallback,
+                errorCallback
+            );
+
+            // 開封通知登録の設定
+            // trueを設定すると、開封通知を行う
+            window.NCMB.monaca.setReceiptStatus(true);
+
+            alert("DeviceToken is registed");
+        },false);
+
+        function getInstallationId() {
+            // 登録されたinstallationのobjectIdを取得します。
+            window.NCMB.monaca.getInstallationId(
+                function(id) {
+                    alert("installationID is: " + id);
+                }
+            );
+        }
+</script>
